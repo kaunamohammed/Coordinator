@@ -14,10 +14,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private lazy var appCoordinator: AppCoordinator = {
+      let coordinator = CoordinatorExampleAppCoordinator(window: window!)
+      return coordinator
+    }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = scene as? UIWindowScene  else { return }
+        
+        let window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        self.window = window
+        self.window?.windowScene = windowScene
+        appCoordinator.start()
+        
     }
 
 }
