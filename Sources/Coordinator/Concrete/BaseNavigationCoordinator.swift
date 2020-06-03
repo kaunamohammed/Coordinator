@@ -48,9 +48,5 @@ open class BaseNavigationCoordinator<Controller: UIViewController, RouteType: Ro
             presenter.popViewController(animated: animated)
         }
     }
-        
-    deinit {
-        print("Bye: \(self)")
-    }
-        
+ 
 }
