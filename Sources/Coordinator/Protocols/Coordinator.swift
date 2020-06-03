@@ -19,9 +19,3 @@ public protocol Coordinator: class {
     func start()
     
 }
-
-public protocol ChildTransitionProtocol: Coordinator {
-    associatedtype RouteType: Route
-    
-    func coordinate(to route: RouteType)
-}

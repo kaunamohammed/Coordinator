@@ -21,11 +21,11 @@ class ViewControllerACoordinator: BaseChildCoordinator<ViewControllerA, VCAAvail
         rootViewController = .init(removeAction: self)
         navigate(with: .push, animated: true)
         rootViewController.didTapButton = { [weak self] in
-            self?.coordinate(to: .coordinatorB)
+            self?.transition(to: .coordinatorB)
         }
     }
     
-    override func coordinate(to route: VCAAvailableRoutes) {
+    override func transition(to route: VCAAvailableRoutes) {
         switch route {
         case .coordinatorB:
             child = ViewControllerBCoordinator(presenter: presenter)
