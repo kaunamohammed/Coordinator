@@ -9,7 +9,7 @@
 import UIKit
 import Coordinator
 
-class ViewControllerCCoordinator: BaseNavigationCoordinator<ViewControllerC> {
+class ViewControllerCCoordinator: BaseNavigationCoordinator<ViewControllerC, NoRoute> {
     
     override func start() {
         rootViewController = .init(removeAction: self)

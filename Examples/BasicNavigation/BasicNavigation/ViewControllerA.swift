@@ -9,17 +9,13 @@
 import UIKit
 import Coordinator
 
-class ViewControllerACoordinator: BaseChildCoordinator<ViewControllerA> {
+enum VCAAvailableRoutes: Route {
+    case coordinatorB
+}
+
+class ViewControllerACoordinator: BaseChildCoordinator<ViewControllerA, VCAAvailableRoutes> {
     
-    enum AvailableRoutes: Route {
-        case coordinatorB
-    }
-    
-    enum ChildKeys: String {
-        case coordinatorB
-    }
-    
-    var child: ViewControllerBCoordinator?
+    var child: ViewControllerBCoordinator!
     
     override func start() {
         rootViewController = .init(removeAction: self)
@@ -29,19 +25,19 @@ class ViewControllerACoordinator: BaseChildCoordinator<ViewControllerA> {
         }
     }
     
-    func coordinate(to route: AvailableRoutes) {
+    override func coordinate(to route: VCAAvailableRoutes) {
         switch route {
         case .coordinatorB:
-            child = .init(presenter: presenter)
-            add(coordinator: child!, key: ChildKeys.coordinatorB.rawValue)
-            child?.start()
-            child?.movingFromParent = { [weak self] in
+            child = ViewControllerBCoordinator(presenter: presenter)
+            add(child)
+            child.start()
+            child.movingFromParent = { [weak self] in
                 guard let strongSelf = self else { return }
-                strongSelf.remove(coordinator: strongSelf.child!)
+                strongSelf.remove(strongSelf.child)
             }
         }
     }
-            
+    
 }
 
 class ViewControllerA: CoordinatorViewController {

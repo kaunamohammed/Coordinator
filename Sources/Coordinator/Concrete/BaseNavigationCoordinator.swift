@@ -12,12 +12,16 @@ import UIKit
  `BaseNavigationCoordinator` is a base class for subclasses wanting to provide a navigation flow
  
  */
-open class BaseNavigationCoordinator<T: UIViewController>: NSObject, NavigationFlowCoordinator {
-    
+open class BaseNavigationCoordinator<Controller: UIViewController, RouteType: Route>: NSObject, NavigationTransitionCoordinator {
+        
+    public var key: String {
+        return String(describing: type(of: self))
+    }
+        
     public let presenter: UINavigationController
     
     /// The `UIViewController` associated with the class
-    public var rootViewController: T!
+    public var rootViewController: Controller!
     
     public var movingFromParent: (() -> Void)?
     
@@ -43,6 +47,10 @@ open class BaseNavigationCoordinator<T: UIViewController>: NSObject, NavigationF
         case .pop:
             presenter.popViewController(animated: animated)
         }
+    }
+        
+    deinit {
+        print("Bye: \(self)")
     }
         
 }

@@ -9,7 +9,18 @@ import UIKit
 
 /// A base class that acts as the starting coordinator
 /// This class should kick off coordination from the 'AppDelegate'
-open class AppCoordinator: Coordinator { 
+open class AppCoordinator: Coordinator {
+    
+    public func coordinate(to route: Route) {
+    
+        
+    }
+    
+    
+    public var key: String {
+        return String(describing: self)
+    }
+    
     
     public let window: UIWindow
     public let presenter: UINavigationController

@@ -8,7 +8,7 @@ import UIKit
 
 /// a convenience class to allow ommiting the `ChildCoordinatable` protocol requirement
 /// while still having the benefit of `ChildCoordinatable`
-open class BaseChildCoordinator<T: UIViewController>: BaseNavigationCoordinator<T>  {
+open class BaseChildCoordinator<Controller: UIViewController, RouteType: Route>: BaseNavigationCoordinator<Controller, RouteType>, ChildTransitionProtocol {
     
     public lazy var children: [String : Coordinator] = [:]
         
@@ -16,25 +16,25 @@ open class BaseChildCoordinator<T: UIViewController>: BaseNavigationCoordinator<
         fatalError("Subclass should implement")
     }
     
+    open func coordinate(to route: RouteType) {
+        
+    }
+        
 }
 
 // MARK: - ChildCoordinatable -
 extension BaseChildCoordinator: ChildCoordinator {
     
-    public func add(coordinator: Coordinator) {
-        add(coordinator: coordinator, key: children.count.stringValue)
+    public func add(_ child: Coordinator) {
+        print("ADD: \(child.key)")
+        children.updateValue(child, forKey: child.key)
+        print(children.values.count)
     }
         
-    public func add(coordinator: Coordinator, key: String) {
-        children.updateValue(coordinator, forKey: key)
-    }
-        
-    public func remove(coordinator: Coordinator) {
-        children = children.filter { $0.value !== coordinator }
-    }
-    
-    public func remove(childKey: String) {
-        children.removeValue(forKey: childKey)
+    public func remove(_ child: Coordinator) {
+        print("REMOVE: \(child.key)")
+        children.removeValue(forKey: child.key)
+        print(children.values.count)
     }
     
     public func removeAll() {

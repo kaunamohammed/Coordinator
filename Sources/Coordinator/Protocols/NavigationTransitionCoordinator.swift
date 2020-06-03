@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol NavigationBarCoordinator: class {
+public protocol NavigationTransitionCoordinator: Coordinator, RemoveAction {
     
     /// the presenter of the next viewcontroller
     var presenter: UINavigationController { get }
@@ -18,7 +18,7 @@ public protocol NavigationBarCoordinator: class {
 }
 
 // MARK: - PresentationStyle
-public extension NavigationBarCoordinator {
+public extension NavigationTransitionCoordinator {
 
     func popViewController(animated: Bool) {
         presenter.popViewController(animated: animated)

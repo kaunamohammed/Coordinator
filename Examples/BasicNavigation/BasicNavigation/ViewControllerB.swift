@@ -9,48 +9,32 @@
 import UIKit
 import Coordinator
 
-class ViewControllerBCoordinator: BaseChildCoordinator<ViewControllerB> {
-    
-    enum AvailableRoutes: Route {
-        case coordinatorC
-    }
-    
-    enum ChildKeys: String {
-        case coordinatorC
-    }
-    
-    var child: ViewControllerCCoordinator?
+enum VCBAvailableRoutes: Route {
+    case coordinatorC
+}
+
+class ViewControllerBCoordinator: BaseChildCoordinator<ViewControllerB, VCBAvailableRoutes> {
     
     override func start() {
         rootViewController = .init(removeAction: self)
         navigate(with: .push, animated: true)
         rootViewController.didTapButton = { [weak self] in
-            self?.startChild()
+            self?.coordinate(to: .coordinatorC)
         }
         
     }
     
-    func coordinate(to route: AvailableRoutes) {
+    override func coordinate(to route: VCBAvailableRoutes) {
         switch route {
         case .coordinatorC:
-            child = .init(presenter: presenter)
-            add(coordinator: child!, key: ChildKeys.coordinatorC.rawValue)
-            child?.start()
-            child?.movingFromParent = { [weak self] in
+            let child = ViewControllerCCoordinator(presenter: presenter)
+            add(child)
+            child.start()
+            child.movingFromParent = { [weak self] in
                 guard let strongSelf = self else { return }
-                strongSelf.remove(coordinator: strongSelf.child!)
+                strongSelf.remove(child)
             }
         }
-    }
-    
-    private func startChild() {
-        child = .init(presenter: presenter)
-        add(coordinator: child!, key: ChildKeys.coordinatorC.rawValue)
-        child!.start()
-    }
-    
-    deinit {
-        print("Bye: \(self)")
     }
     
 }
