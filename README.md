@@ -140,7 +140,7 @@ class ViewControllerACoordinator: ChildCoordinator<ViewControllerA> {
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. 
 
-Once you have your Swift package set up, adding Alamofire as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+Once you have your Swift package set up, adding Coordinator as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
 ```swift
 dependencies: [
@@ -159,8 +159,6 @@ CoordinatorLibrary is available under the MIT license. See the LICENSE file for 
 # CoordinatorLibrary
 
 ## Where to go from here
-
-View the [changedfeed](https://coordinator-library.changefeed.app/coordinator-library) for this repo to see what's changed between releases
 
 Coordinators, can be hard to grasp initially, but it is a surprisingly simple and extensible architecture when you cross that initial step of starting. There's some great articles on the web that I recommend reading to flesh out your understanding of how coordinators work.
 - [The Coordinator](http://khanlou.com/2015/01/the-coordinator/)
