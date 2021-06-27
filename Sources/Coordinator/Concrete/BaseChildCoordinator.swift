@@ -22,15 +22,15 @@ open class BaseChildCoordinator<Controller: UIViewController>: BaseNavigationCoo
 extension BaseChildCoordinator: ChildCoordinator {
     
     public func add(_ child: Coordinator) {
-        print("ADD: \(child.key)")
+//        print("ADD: \(child.key)")
         children.updateValue(child, forKey: child.key)
-        print(children.values.count)
+//        print(children.values.count)
     }
         
     public func remove(_ child: Coordinator) {
-        print("REMOVE: \(child.key)")
+//        print("REMOVE: \(child.key)")
         children.removeValue(forKey: child.key)
-        print(children.values.count)
+//        print(children.values.count)
     }
     
     public func removeAll() {

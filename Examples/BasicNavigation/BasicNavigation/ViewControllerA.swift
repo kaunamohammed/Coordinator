@@ -13,28 +13,23 @@ enum VCAAvailableRoutes: Route {
     case coordinatorB
 }
 
-class ViewControllerACoordinator: BaseChildCoordinator<ViewControllerA, VCAAvailableRoutes> {
-    
-    var child: ViewControllerBCoordinator!
-    
+class ViewControllerACoordinator: BaseChildCoordinator<ViewControllerA> {
+        
     override func start() {
         rootViewController = .init(removeAction: self)
         navigate(with: .push, animated: true)
+        
         rootViewController.didTapButton = { [weak self] in
-            self?.transition(to: .coordinatorB)
+            self?.startCoordinator()
         }
     }
     
-    override func transition(to route: VCAAvailableRoutes) {
-        switch route {
-        case .coordinatorB:
-            child = ViewControllerBCoordinator(presenter: presenter)
-            add(child)
-            child.start()
-            child.movingFromParent = { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.remove(strongSelf.child)
-            }
+    func startCoordinator() {
+        let child = ViewControllerBCoordinator(presenter: presenter)
+        add(child)
+        child.start()
+        child.movingFromParent = { [weak self] in
+            self?.remove(child)
         }
     }
     
