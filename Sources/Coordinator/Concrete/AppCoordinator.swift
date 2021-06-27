@@ -11,12 +11,6 @@ import UIKit
 /// This class should kick off coordination from the 'AppDelegate'
 open class AppCoordinator: Coordinator {
     
-    public func coordinate(to route: Route) {
-    
-        
-    }
-    
-    
     public var key: String {
         return String(describing: self)
     }

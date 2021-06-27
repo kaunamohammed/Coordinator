@@ -13,7 +13,7 @@ public protocol NavigationTransitionCoordinator: Coordinator, RemoveAction {
     var presenter: UINavigationController { get }
     
     /// navigates to a `UIViewController` with a particular presentation style
-    func navigate(with presentationStyle: PresentationStyle, animated: Bool)
+    func navigate(with presentationStyle: PresentationStyle, animated: Bool, completion: (() -> Void)?)
         
 }
 

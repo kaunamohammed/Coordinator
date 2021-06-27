@@ -8,16 +8,12 @@ import UIKit
 
 /// a convenience class to allow ommiting the `ChildCoordinatable` protocol requirement
 /// while still having the benefit of `ChildCoordinatable`
-open class BaseChildCoordinator<Controller: UIViewController, RouteType: Route>: BaseNavigationCoordinator<Controller, RouteType>, ChildTransitionCoordinator {
+open class BaseChildCoordinator<Controller: UIViewController>: BaseNavigationCoordinator<Controller> {
     
     public lazy var children: [String : Coordinator] = [:]
         
     open override func start() {
         fatalError("Subclass should implement")
-    }
-    
-    open func transition(to route: RouteType) {
-        
     }
         
 }

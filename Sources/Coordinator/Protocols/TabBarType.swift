@@ -12,7 +12,7 @@ import UIKit
  `TabBarType` allows access to a tab bar item
  
  */
-public protocol TabBarType: class {
+public protocol TabBarType: AnyObject {
     /// The tab bar item to apply to the root controller
     var tabBarItem: UITabBarItem { get }
 }

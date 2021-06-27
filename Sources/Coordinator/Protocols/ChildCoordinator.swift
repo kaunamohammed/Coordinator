@@ -8,7 +8,7 @@
 /**
  `ChildCoordinatable` handles adding and removing child coordinatables from types conforming to it
  */
-public protocol ChildCoordinator: class {
+public protocol ChildCoordinator: AnyObject {
     
     /// The dictionary containing any child coordinatable
     var children: [String: Coordinator] { get set }

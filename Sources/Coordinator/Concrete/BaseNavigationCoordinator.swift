@@ -12,7 +12,7 @@ import UIKit
  `BaseNavigationCoordinator` is a base class for subclasses wanting to provide a navigation flow
  
  */
-open class BaseNavigationCoordinator<Controller: UIViewController, RouteType: Route>: NSObject, NavigationTransitionCoordinator {
+open class BaseNavigationCoordinator<Controller: UIViewController>: NSObject, NavigationTransitionCoordinator {
         
     public var key: String {
         return String(describing: type(of: self))
@@ -25,7 +25,7 @@ open class BaseNavigationCoordinator<Controller: UIViewController, RouteType: Ro
     
     public var movingFromParent: (() -> Void)?
     
-    public init(presenter: UINavigationController = .init()) {
+    public init(presenter: UINavigationController) {
         self.presenter = presenter
     }
     
@@ -34,10 +34,10 @@ open class BaseNavigationCoordinator<Controller: UIViewController, RouteType: Ro
         fatalError("Subclass must provide implementation")
     }
     
-    public func navigate(with presentationStyle: PresentationStyle, animated: Bool) {
+    public func navigate(with presentationStyle: PresentationStyle, animated: Bool, completion: (() -> Void)? = nil) {
         switch presentationStyle {
         case .present:
-            presenter.present(rootViewController, animated: animated, completion: nil)
+            presenter.present(rootViewController, animated: animated, completion: completion)
         case .push:
             presenter.pushViewController(rootViewController, animated: animated)
         case .set:

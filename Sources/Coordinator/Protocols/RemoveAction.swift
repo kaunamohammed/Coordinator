@@ -9,7 +9,7 @@ import Foundation
 
 public typealias CoordinatorAction = (() -> Void)
 
-public protocol RemoveAction: class {
+public protocol RemoveAction: AnyObject {
     
     /// A closure called when a child coordinator is removed from a parent coordinator.
     var movingFromParent: CoordinatorAction? { get }
